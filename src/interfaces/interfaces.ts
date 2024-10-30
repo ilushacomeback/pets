@@ -4,6 +4,7 @@ export interface LinkType {
 }
 
 export interface PetType {
+  id: string;
   name: string | null;
   year: number | null;
   breed: string;
@@ -14,6 +15,7 @@ export interface PetType {
 
 const pets: PetType[] = [
   {
+    id: 'q',
     name: 'name',
     year: 2015,
     breed: 'дворняжка',
@@ -22,6 +24,7 @@ const pets: PetType[] = [
     description: 'goop pes',
   },
   {
+    id: 'q',
     name: 'name',
     year: 2010,
     breed: 'дворняжка',
@@ -30,6 +33,7 @@ const pets: PetType[] = [
     description: 'goop pes',
   },
   {
+    id: 'q',
     name: 'name',
     year: 2017,
     breed: 'дворняжка',
@@ -38,6 +42,7 @@ const pets: PetType[] = [
     description: 'goop peds',
   },
   {
+    id: 'q',
     name: 'name',
     year: 2019,
     breed: 'дворняжка',
@@ -46,6 +51,7 @@ const pets: PetType[] = [
     description: 'goop pes',
   },
   {
+    id: 'q',
     name: 'name',
     year: 2024,
     breed: 'дворняжка',
@@ -54,6 +60,7 @@ const pets: PetType[] = [
     description: 'goop pes',
   },
   {
+    id: 'q',
     name: 'name',
     year: 2015,
     breed: 'дворняжка',
