@@ -10,8 +10,8 @@ import { FormEvent } from 'react';
 export default function Create() {
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const data = new FormData(e.target);
-    console.log(data.get('photos'));
+    // const data = new FormData(e.target);
+    // console.log(data.get('photos'));
   };
 
   return (
