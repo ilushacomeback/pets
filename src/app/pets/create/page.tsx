@@ -5,6 +5,7 @@ import { FieldName } from '@/components/ui/forms/create';
 import { FieldBirthday } from '@/components/ui/forms/create';
 import { Cities } from '@/components/Cities';
 import { Submit } from '@/components/ui/forms/create';
+import { Breeds } from '@/components/Breeds';
 import { FormEvent } from 'react';
 
 export default function Create() {
@@ -18,11 +19,12 @@ export default function Create() {
     <form
       action=""
       encType="multipart/form-data"
-      className="flex flex-col h-screen w-56 m-auto my-16"
+      className="flex flex-col h-screen w-60 m-auto my-16"
       onSubmit={handleSubmit}
     >
       <FieldName />
       <FieldBirthday />
+      <Breeds />
       <Cities />
       <FileLoader />
       <Submit />

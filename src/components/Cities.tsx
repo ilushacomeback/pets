@@ -1,6 +1,7 @@
 'use client';
 
 import { ChangeEvent, MouseEvent, useState } from 'react';
+import { useThrottledCallback } from 'use-debounce';
 
 export function Cities() {
   const url = process.env.NEXT_PUBLIC_CITY_URL as string;
@@ -20,12 +21,12 @@ export function Cities() {
     body: JSON.stringify({ query: query, count: 20 }),
   };
 
-  const getCity = async (e: ChangeEvent<HTMLInputElement>) => {
+  const getCity = useThrottledCallback(async (e: ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
     const response = await fetch(url, options);
     const data = await response.json();
     setCities(data.suggestions);
-  };
+  }, 500)
 
   return (
     <>
@@ -51,7 +52,7 @@ export function Cities() {
         />
       )}
       {cities.length > 0 && !currentCity && (
-        <ul className="h-50 overflow-y-auto">
+        <ul className="min-h-52 overflow-y-auto">
           {cities.map((city: { value: string }) => (
             <li
               key={city.value}

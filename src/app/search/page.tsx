@@ -1,5 +1,3 @@
-'use client';
-
-export default function Search() {
-  return <div>search page</div>
+export default async function Search() {
+  return <div>search page</div>;
 }
