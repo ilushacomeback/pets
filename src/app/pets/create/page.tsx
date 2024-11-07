@@ -19,7 +19,7 @@ export default function Create() {
     <form
       action=""
       encType="multipart/form-data"
-      className="flex flex-col h-screen w-60 m-auto my-16"
+      className="flex flex-col gap-3 w-60 m-auto mt-14"
       onSubmit={handleSubmit}
     >
       <FieldName />

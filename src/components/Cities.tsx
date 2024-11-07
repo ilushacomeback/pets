@@ -2,6 +2,7 @@
 
 import { ChangeEvent, MouseEvent, useState } from 'react';
 import { useThrottledCallback } from 'use-debounce';
+import { Label, Input } from '@/components/ui/forms/create'
 
 export function Cities() {
   const url = process.env.NEXT_PUBLIC_CITY_URL as string;
@@ -29,10 +30,10 @@ export function Cities() {
   }, 500)
 
   return (
-    <>
-      <label htmlFor="city" className="mt-2">
+    <div>
+      <Label htmlFor="city">
         Город:
-      </label>
+      </Label>
       {currentCity ? (
         <div className="flex justify-between">
           <span>{currentCity}</span>
@@ -41,11 +42,10 @@ export function Cities() {
           </button>
         </div>
       ) : (
-        <input
+        <Input
           name="city"
           id="city"
           type="text"
-          className="border rounded pl-2 py-2"
           placeholder="Начните вводить город..."
           onChange={getCity}
           autoComplete="off"
@@ -68,6 +68,6 @@ export function Cities() {
           ))}
         </ul>
       )}
-    </>
+    </div>
   );
 }
