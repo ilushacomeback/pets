@@ -2,17 +2,20 @@ import {
   ButtonHTMLAttributes,
   InputHTMLAttributes,
   LabelHTMLAttributes,
+  memo,
   ReactNode,
   RefObject,
 } from 'react';
 import clsx from 'clsx';
+import { PropsActionForm } from '@/interfaces/interfaces';
 
 interface HTMLProps {
   children?: ReactNode;
 }
 
 type LabelProps = HTMLProps & LabelHTMLAttributes<HTMLLabelElement>;
-type InputProps = HTMLProps & InputHTMLAttributes<HTMLInputElement> & { ref?: RefObject<HTMLInputElement> };
+type InputProps = HTMLProps &
+  InputHTMLAttributes<HTMLInputElement> & { ref?: RefObject<HTMLInputElement> };
 type ButtonProps = HTMLProps & ButtonHTMLAttributes<HTMLButtonElement>;
 
 export function Label({ className, children, ...rest }: LabelProps) {
@@ -24,7 +27,15 @@ export function Label({ className, children, ...rest }: LabelProps) {
 }
 
 export function Input({ className, ...rest }: InputProps) {
-  return <input className={clsx('p-2 min-w-full border-2 rounded outline-none', className)} {...rest} />;
+  return (
+    <input
+      className={clsx(
+        'p-2 min-w-full border-2 rounded outline-none',
+        className
+      )}
+      {...rest}
+    />
+  );
 }
 
 export function Button({ className, children, ...rest }: ButtonProps) {
@@ -35,30 +46,47 @@ export function Button({ className, children, ...rest }: ButtonProps) {
   );
 }
 
-export function FieldName() {
+export const FieldName = memo(function FieldName({ state }: PropsActionForm) {
   return (
     <div>
       <Label htmlFor="name">Имя:</Label>
-      <Input type="text" name="name" id="name" placeholder="Введите имя..." />
+      <Input
+        type="text"
+        name="name"
+        id="name"
+        placeholder="Введите имя..."
+        onChange={(e) => {
+          if (state.current) {
+            state.current.name = e.target.value;
+          }
+        }}
+      />
     </div>
   );
-}
+});
 
-export function FieldBirthday() {
+export const FieldBirthday = memo(function FieldBirthday({
+  state,
+}: PropsActionForm) {
   return (
     <div>
       <Label htmlFor="date">Дата рождения:</Label>
-      <Input type="date" id="date" />
+      <Input
+        type="date"
+        id="date"
+        onChange={(e) => {
+          if (state.current) {
+            state.current.date = e.target.value;
+          }
+        }}
+      />
     </div>
   );
-}
+});
 
 export function Submit() {
   return (
-    <Button
-      type="submit"
-      className="mt-7 bg-black text-2xl text-white "
-    >
+    <Button type="submit" className="mt-7 bg-black text-2xl text-white ">
       Oтправить
     </Button>
   );

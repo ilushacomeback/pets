@@ -1,9 +1,10 @@
 'use client';
 
 import { ChangeEvent, useRef, useState } from 'react';
+import { PropsActionForm } from '@/interfaces/interfaces';
 import Image from 'next/image';
 
-export function FileLoader() {
+export function FileLoader({ state }: PropsActionForm) {
   const refImage = useRef<HTMLInputElement>(null);
   const [linksImages, setLinksImages] = useState<string[]>([]);
 

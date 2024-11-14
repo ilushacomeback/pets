@@ -1,11 +1,13 @@
 'use client';
 
 import Image from 'next/image';
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { allBreeds } from '@/data/breeds';
-import { Breed } from '@/interfaces/interfaces';
+import { Breed, PropsActionForm } from '@/interfaces/interfaces';
 import { Label, Input } from '@/components/ui/forms/create';
 import clsx from 'clsx';
+
+
 
 function filterBreeds(name: string) {
   const regex = new RegExp('' + name + '', 'gi');
@@ -13,13 +15,19 @@ function filterBreeds(name: string) {
   return currentBreeds;
 }
 
-export function Breeds() {
+export function Breeds({ state }: PropsActionForm) {
   const [checkedBreeds, setCheckedBreeds] = useState<Record<string, string>>(
     {}
   );
   const [findBreed, setFindBreed] = useState<string>('');
   const [breeds, setBreeds] = useState<Breed[]>([]);
   const [inputFocus, setInputFocus] = useState<boolean>(false);
+
+  useEffect(() => {
+    if (state.current) {
+      state.current.breeds = Object.keys(checkedBreeds)
+    } 
+  }, [checkedBreeds, state])
 
   const removeCheck = (breedID: string) => {
     setCheckedBreeds((prev) => {
@@ -42,7 +50,7 @@ export function Breeds() {
     } else {
       removeCheck(id);
     }
-    setFindBreed('')
+    // setFindBreed('')
   };
 
   return (
@@ -109,7 +117,6 @@ export function Breeds() {
                   value={breed.name}
                   name="breed"
                   className="mr-3"
-                  //   onChange={(e) => !e.target.checked && removeCheck(breed.id)}
                   defaultChecked={!!checkedBreeds[breed.id]}
                 />
                 <label htmlFor={breed.id} className="w-full leading-5">
