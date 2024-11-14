@@ -42,6 +42,7 @@ export function Breeds() {
     } else {
       removeCheck(id);
     }
+    setFindBreed('')
   };
 
   return (
@@ -64,8 +65,8 @@ export function Breeds() {
         </div>
       )}
       <div
-        className={clsx('border-lime-300 rounded', {
-          'border-2': inputFocus,
+        className={clsx({
+          'border-2  border-lime-300 rounded': breeds.length > 0,
         })}
       >
         <Input
@@ -73,8 +74,8 @@ export function Breeds() {
           id="breed"
           name="breed"
           className={clsx('mt-0', {
-            'border-b-2': breeds.length > 0,
-            'border-0 rounded-none  border-lime-300': inputFocus,
+            'border-t-0 border-l-0 border-r-0 rounded-b-none': breeds.length > 0,
+            'border-lime-300': inputFocus
           })}
           placeholder="Начните вводить породу..."
           spellCheck={false}
@@ -83,8 +84,8 @@ export function Breeds() {
           onChange={handleFindBreed}
           onFocus={(e) => setInputFocus(true)}
           onBlur={(e) => {
-            setInputFocus(false)
-            setBreeds([])
+            setInputFocus(false);
+            setBreeds([]);
           }}
         />
         {breeds.length > 0 && (
@@ -108,7 +109,7 @@ export function Breeds() {
                   value={breed.name}
                   name="breed"
                   className="mr-3"
-                //   onChange={(e) => !e.target.checked && removeCheck(breed.id)}
+                  //   onChange={(e) => !e.target.checked && removeCheck(breed.id)}
                   defaultChecked={!!checkedBreeds[breed.id]}
                 />
                 <label htmlFor={breed.id} className="w-full leading-5">
